@@ -6,7 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.example.fragment_application.databinding.ActivityMainBinding
+import com.example.fragment_application.databinding.FragmentLifecycleBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,13 +23,20 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Lifecycle_Fragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Lifecycle_Fragment : Fragment() {
+class Lifecycle_Fragment : Fragment(), ActivityInterface {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var btnincrement : Button? = null
+    var mainActivity : MainActivity? = null
+    var btndec : Button? = null
+    var btnreset : Button? = null
+    var llfragment : LinearLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mainActivity = activity as MainActivity
+        mainActivity?.activityInterface = this
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -39,9 +51,12 @@ class Lifecycle_Fragment : Fragment() {
         return inflater.inflate(R.layout.fragment_lifecycle_, container, false)
     }
 
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         Toast.makeText(requireContext(),"this is onAttach",Toast.LENGTH_LONG).show()
+
+
     }
 
     override fun onDetach() {
@@ -51,7 +66,21 @@ class Lifecycle_Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Toast.makeText(requireContext(),"this is onCreated",Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(),"this is onViewCreated",Toast.LENGTH_LONG).show()
+        btnincrement = view.findViewById(R.id.btnincrement)
+        btndec = view.findViewById(R.id.btndec)
+        btnreset = view.findViewById(R.id.btnreset)
+        llfragment = view.findViewById(R.id.llfragment)
+
+        btnincrement?.setOnClickListener {
+            mainActivity?.incrementNumber()
+        }
+        btndec?.setOnClickListener {
+            mainActivity?.decrementNumber()
+        }
+        btnreset?.setOnClickListener {
+            mainActivity?.resetNummber()
+        }
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
@@ -112,4 +141,17 @@ class Lifecycle_Fragment : Fragment() {
                 }
             }
     }
-}
+
+    override fun changeColor(number: Int) {
+        when(number){
+            1 -> llfragment?.setBackgroundColor(ContextCompat.getColor(requireContext(),(R.color.red)))
+            }
+        when(number){
+            2 -> llfragment?.setBackgroundColor(ContextCompat.getColor(requireContext(),(R.color.green)))
+        }
+        when(number){
+            3 -> llfragment?.setBackgroundColor(ContextCompat.getColor(requireContext(),(R.color.blue)))
+        }
+
+    }
+    }

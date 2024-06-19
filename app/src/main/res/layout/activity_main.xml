@@ -1,19 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".MainActivity"
+        android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btnred"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/red"
+        android:backgroundTint="@color/red"
+        android:textSize="20sp"
+        android:layout_gravity="start"/>
+    <Button
+        android:id="@+id/btngreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/green"
+        android:backgroundTint="@color/green"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginStart="30dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/btnblue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue"
+        android:text="@string/blue"
+        android:textSize="20sp"
+        android:layout_marginStart="30dp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnnumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/number"
+        android:layout_gravity="center"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/FragmentContainer"
+        android:name="com.example.fragment_application.Lifecycle_Fragment">
+
+    </androidx.fragment.app.FragmentContainerView>
+
+</LinearLayout>
